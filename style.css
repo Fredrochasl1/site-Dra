@@ -189,12 +189,12 @@ footer {
 }
 
 /* --- ESTILO DO BOTÃO WHATSAPP --- */
-/* (Vamos tentar consertar isso depois) */
 #whatsapp-button {
-    position: fixed; 
+    position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 1000; 
+    z-index: 1000;
+    display: block; /* Garante que o link se comporte como um bloco para posicionamento */
 }
 
 #whatsapp-button img {
