@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Carla Almeida - Cirurgiã oncológica</title>
+    
+    <!-- LIGAÇÃO COM O ARQUIVO DE ESTILO -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- IMPORTAÇÃO DAS FONTES DO GOOGLE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 
+      O 'Pai' do Flexbox (Wrapper)
+      Este 'div' vai "abraçar" nossos dois filhos (a barra lateral e o conteúdo)
+      e nos permitirá colocá-los lado a lado.
+    -->
+    <div class="site-wrapper">
+
+        <!-- 
+          Filho 1: A Barra Lateral (<aside>)
+          Usamos <aside> pois é uma tag para "conteúdo lateral".
+          Repare que o <header> antigo (nome da Dra.) agora mora aqui.
+        -->
+        <aside class="sidebar">
+            
+            <!-- Identidade Visual da Doutora -->
+            <div class="sidebar-header">
+                <!-- (Aqui poderíamos adicionar a foto dela no futuro) -->
+                 <img src="https://placehold.co/150x150/008080/FFFFFF?text=Foto" alt="Foto da Dr. Carla Almeida" class="profile-picture">
+                <h1 class="sidebar-title">Dr. Carla Almeida</h1>
+                <p class="sidebar-subtitle">Cirurgiã oncológica CRM: 123456</p>
+            </div>
+
+            <!-- 
+              Navegação Principal
+              Usamos <nav> para "navegação".
+              Os links href="#sobre" vão pular para as seções com id="sobre".
+            -->
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#sobre">Sobre Mim</a></li>
+                    <li><a href="#locais">Locais de Atendimento</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <!-- (Adicione mais links se criar mais seções) -->
+                </ul>
+            </nav>
+
+        </aside> <!-- Fim do Filho 1 -->
+
+        <!-- 
+          Filho 2: O Conteúdo Principal (<main>)
+          Este container vai segurar todas as nossas seções de conteúdo
+          e será a parte "rolável" do site.
+        -->
+        <main class="main-content">
+
+            <!-- Nossas seções antigas continuam aqui dentro -->
+            <section id="sobre">
+                <h2>Sobre Mim e Minha Especialidade</h2>
+                <p>
+                    Aqui você pode escrever um parágrafo breve sobre sua formação, 
+                    sua filosofia de atendimento e o que trata sua especialidade.
+                    (Ex: "Com foco no atendimento humanizado, busco oferecer...")
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Pellentesque imperdiet, elit vel convallis lobortis, 
+                    mi eros ultrices massa, vel sodales nisi tellus vel eros.
+                </p>
+            </section>
+
+            <section id="locais">
+                <h2>Locais de Atendimento</h2>
+                <article>
+                    <h3>Nome da Clínica 1</h3>
+                    <p>Endereço: Rua Exemplo, 123 - Bairro, Cidade</p>
+                    <p>Telefone: (11) 98765-4321</p>
+                    <p>Horários: Segunda a Sexta, das 08h às 18h</p>
+                </article>
+                <article>
+                    <h3>Nome da Clínica 2 ou Hospital</h3>
+                    <p>Endereço: Avenida Teste, 456 - Centro, Cidade</p>
+                    <p>Telefone: (11) 12345-6789</p>
+                    <p>Horários: Sábados, das 09h às 13h</p>
+                </article>
+            </section>
+
+            <section id="contato">
+                <h2>Entre em Contato</h2>
+                <p>Agende sua consulta diretamente pelo WhatsApp ou ligue para os números acima.</p>
+            </section>
+
+            <!-- O rodapé agora fica no final do conteúdo principal -->
+            <footer>
+                <p>© 2025 - Dr. Carla Almeida - Todos os direitos reservados.</p>
+            </footer>
+
+        </main> <!-- Fim do Filho 2 -->
+
+    </div> <!-- Fim do 'Pai' (site-wrapper) -->
+
+
+    <!-- 
+      O Botão do WhatsApp fica FORA do wrapper, para flutuar livremente 
+      (Vamos tentar corrigir o bug dele depois)
+    -->
+    <a 
+        id="whatsapp-button"
+        href="https://api.whatsapp.com/send?phone=5511999998888&text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta." 
+        target="_blank">
+        
+        <img src="https://i.imgur.com/ryESmWf.png" alt="Fale Conosco pelo WhatsApp">
+    </a>
+
+</body>
+</html>

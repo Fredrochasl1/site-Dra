@@ -1,0 +1,209 @@
+/* --- ROLAGEM SUAVE --- */
+/* Esta linha única faz com que os links href="#id" 
+   deslizem suavemente em vez de pular */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Configuração geral do corpo da página */
+body {
+    font-family: 'Roboto', sans-serif; /* Fonte do Corpo */
+    line-height: 1.6;
+    background-color: #f4f4f4; /* Fundo cinza claro (agora visível no conteúdo) */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Definindo a fonte dos Títulos */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* --- LAYOUT PROFISSIONAL (FLEXBOX) --- 
+*/
+
+/* * 1. O 'Pai' (O Conceito Flexbox)
+ */
+.site-wrapper {
+    /* ESTA É A LINHA MÁGICA: 
+       Diz ao 'pai' para colocar seus filhos 'lado a lado'.
+       (Neste caso, os filhos são .sidebar e .main-content) */
+    display: flex;
+}
+
+
+/* * 2. O 'Filho 1' (A Barra Lateral)
+ */
+.sidebar {
+    /* Define a largura fixa da barra. */
+    flex-basis: 300px; 
+    
+    /* Faz a barra ter 100% da altura da TELA (vh = viewport height) */
+    height: 100vh; 
+    
+    /* ESTA É A OUTRA MÁGICA:
+       'position: fixed' "prega" a barra na tela. 
+       Ela não vai rolar com o conteúdo. */
+    position: fixed; 
+    top: 0;  /* Prega no topo */
+    left: 0; /* Prega na esquerda */
+
+    /* Estilos visuais */
+    background-color: #ffffff; /* Fundo branco para a barra */
+    padding: 30px;
+    /* Adiciona uma sombra sutil à direita da barra */
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1); 
+    
+    /* Garante que a barra fique acima de tudo */
+    z-index: 100; 
+    
+    /* Centraliza o conteúdo da barra (nome, links) */
+    text-align: center;
+}
+
+
+/* * 3. O 'Filho 2' (O Conteúdo Principal)
+ */
+.main-content {
+    /* Diz ao conteúdo: 'cresça e ocupe todo o 
+       espaço restante que a sidebar não usou'. */
+    flex-grow: 1;
+
+    /* PASSO CRUCIAL: 
+       Como a sidebar é 'fixed' (300px de largura), 
+       precisamos "empurrar" o conteúdo principal 
+       para a direita, senão ele ficaria *atrás* da barra. */
+    margin-left: 300px;
+    
+    /* Adiciona um preenchimento interno para o conteúdo respirar */
+    padding: 20px;
+}
+
+
+/* --- Estilos para os Novos Itens da Sidebar --- */
+/* Estilo da Foto de Perfil */
+.profile-picture {
+    width: 150px;  /* Define a largura */
+    height: 150px; /* Define a altura */
+
+    /* ESTA É A LINHA MÁGICA: 
+       50% de raio de borda em um quadrado, cria um círculo. */
+    border-radius: 50%; 
+
+    /* Garante que a imagem preencha o círculo, sem distorcer */
+    object-fit: cover; 
+
+    /* Espaço entre a foto e o título abaixo dela */
+    margin-bottom: 20px; 
+
+    /* Uma borda cinza clara sutil, como no exemplo do Dr. Thiago */
+    border: 4px solid #eee; 
+}
+
+.sidebar-title {
+    font-size: 1.8em; /* Tamanho do nome */
+    color: #008080; /* Usando nosso verde-água */
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.sidebar-subtitle {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 5px; /* Sobe um pouco a especialidade */
+}
+
+/* A lista de navegação */
+.sidebar-nav ul {
+    list-style-type: none; /* Remove as bolinhas da lista */
+    padding: 0;
+    margin-top: 40px;
+}
+
+/* Os links da navegação */
+.sidebar-nav a {
+    display: block; /* Faz o link ocupar a linha toda (facilita clicar) */
+    text-decoration: none; /* Remove o sublinhado */
+    color: #555;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    padding: 12px 0; /* Espaçamento */
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Efeito suave de cor e fundo */
+}
+
+/* Efeito ao passar o mouse */
+.sidebar-nav a:hover {
+    color: #ffffff; /* Texto fica branco */
+    background-color: #008080; /* Fundo fica verde-água */
+}
+
+
+/* --- Estilos Antigos (Seções) --- */
+
+section {
+    background-color: #ffffff; 
+    margin-bottom: 20px;
+    padding: 30px; /* Aumentei o preenchimento */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra mais suave */
+
+    /* Centraliza os blocos de seção na área de conteúdo */
+    max-width: 960px; 
+    margin-left: auto;   
+    margin-right: auto;
+    margin-bottom: 25px; /* Espaço entre seções */
+}
+
+section h2 {
+    color: #008080; /* Título da seção em verde-água */
+    margin-top: 0;
+    border-bottom: 2px solid #f0f0f0; /* Linha sutil abaixo do título */
+    padding-bottom: 10px;
+}
+
+/* Estilo dos Locais de Atendimento */
+article {
+    border-bottom: 1px dotted #ccc; 
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+article:last-child {
+    border-bottom: none; 
+}
+
+article h3 {
+    margin-bottom: 5px;
+}
+
+/* Estilo do Rodapé */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #aaa; /* Cor mais suave */
+    font-size: 0.9em;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* --- ESTILO DO BOTÃO WHATSAPP --- */
+/* (Vamos tentar consertar isso depois) */
+#whatsapp-button {
+    position: fixed; 
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000; 
+}
+
+#whatsapp-button img {
+    width: 60px;
+    border-radius: 50%; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s; 
+}
+
+#whatsapp-button img:hover {
+    transform: scale(1.1); 
+}
