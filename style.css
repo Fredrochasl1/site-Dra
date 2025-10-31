@@ -1,6 +1,4 @@
 /* --- ROLAGEM SUAVE --- */
-/* Esta linha única faz com que os links href="#id" 
-   deslizem suavemente em vez de pular */
 html {
     scroll-behavior: smooth;
 }
@@ -20,63 +18,37 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
 }
 
-/* --- LAYOUT PROFISSIONAL (FLEXBOX) --- 
-*/
+/* --- LAYOUT - MOBILE FIRST --- */
 
-/* * 1. O 'Pai' (O Conceito Flexbox)
- */
+/* 1. O 'Pai' (Wrapper) */
+/* Por padrão, no mobile, o wrapper não precisa de regras especiais.
+   Os elementos <aside> e <main> ficarão um embaixo do outro naturalmente. */
 .site-wrapper {
-    /* ESTA É A LINHA MÁGICA: 
-       Diz ao 'pai' para colocar seus filhos 'lado a lado'.
-       (Neste caso, os filhos são .sidebar e .main-content) */
-    display: flex;
+    /* display: flex; será adicionado apenas no desktop via @media query */
 }
 
-
-/* * 2. O 'Filho 1' (A Barra Lateral)
- */
+/* 2. 'Filho 1' (A Barra Lateral) */
 .sidebar {
-    /* Define a largura fixa da barra. */
-    flex-basis: 300px; 
-    
-    /* Faz a barra ter 100% da altura da TELA (vh = viewport height) */
-    height: 100vh; 
-    
-    /* ESTA É A OUTRA MÁGICA:
-       'position: fixed' "prega" a barra na tela. 
-       Ela não vai rolar com o conteúdo. */
-    position: fixed; 
-    top: 0;  /* Prega no topo */
-    left: 0; /* Prega na esquerda */
+    /* No mobile, a barra não é fixa e ocupa a largura que precisar.
+       Ela se comporta como um cabeçalho normal no topo da página. */
+    /* As propriedades de layout de desktop (position, height, flex-basis)
+       serão adicionadas na @media query. */
+    width: 100%; /* Garante que ocupe a largura toda */
+    box-sizing: border-box; /* Faz o padding não aumentar a largura total */
 
-    /* Estilos visuais */
-    background-color: #ffffff; /* Fundo branco para a barra */
-    padding: 30px;
-    /* Adiciona uma sombra sutil à direita da barra */
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1); 
-    
-    /* Garante que a barra fique acima de tudo */
-    z-index: 100; 
-    
-    /* Centraliza o conteúdo da barra (nome, links) */
+    /* Estilos visuais que valem para mobile e desktop */
+    background-color: #ffffff;
+    padding: 20px 15px; /* Padding ajustado para telas menores */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Sombra para baixo */
+    z-index: 100;
     text-align: center;
 }
 
-
-/* * 3. O 'Filho 2' (O Conteúdo Principal)
- */
+/* 3. 'Filho 2' (O Conteúdo Principal) */
 .main-content {
-    /* Diz ao conteúdo: 'cresça e ocupe todo o 
-       espaço restante que a sidebar não usou'. */
-    flex-grow: 1;
-
-    /* PASSO CRUCIAL: 
-       Como a sidebar é 'fixed' (300px de largura), 
-       precisamos "empurrar" o conteúdo principal 
-       para a direita, senão ele ficaria *atrás* da barra. */
-    margin-left: 300px;
-    
-    /* Adiciona um preenchimento interno para o conteúdo respirar */
+    /* No mobile, o conteúdo simplesmente flui abaixo da sidebar.
+       O margin-left que o "empurrava" para o lado no desktop
+       será adicionado apenas na @media query. */
     padding: 20px;
 }
 
@@ -84,94 +56,81 @@ h1, h2, h3, h4, h5, h6 {
 /* --- Estilos para os Novos Itens da Sidebar --- */
 /* Estilo da Foto de Perfil */
 .profile-picture {
-    width: 150px;  /* Define a largura */
-    height: 150px; /* Define a altura */
-
-    /* ESTA É A LINHA MÁGICA: 
-       50% de raio de borda em um quadrado, cria um círculo. */
-    border-radius: 50%; 
-
-    /* Garante que a imagem preencha o círculo, sem distorcer */
-    object-fit: cover; 
-
-    /* Espaço entre a foto e o título abaixo dela */
-    margin-bottom: 20px; 
-
-    /* Uma borda cinza clara sutil, como no exemplo do Dr. Thiago */
-    border: 4px solid #eee; 
+    width: 120px;  /* Tamanho reduzido para mobile */
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 4px solid #eee;
 }
 
 .sidebar-title {
-    font-size: 1.8em; /* Tamanho do nome */
-    color: #008080; /* Usando nosso verde-água */
-    margin-top: 10px;
-    margin-bottom: 0;
+    font-size: 1.5em; /* Tamanho ajustado */
+    color: #008080;
+    margin: 0;
 }
 
 .sidebar-subtitle {
     font-size: 0.9em;
     color: #777;
-    margin-top: 5px; /* Sobe um pouco a especialidade */
+    margin-top: 5px;
 }
 
 /* A lista de navegação */
 .sidebar-nav ul {
-    list-style-type: none; /* Remove as bolinhas da lista */
+    list-style-type: none;
     padding: 0;
-    margin-top: 40px;
+    margin-top: 20px;
+    /* No mobile, os links podem ser mostrados em linha */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
 
 /* Os links da navegação */
 .sidebar-nav a {
-    display: block; /* Faz o link ocupar a linha toda (facilita clicar) */
-    text-decoration: none; /* Remove o sublinhado */
+    display: inline-block; /* Altera para inline-block para o flexbox funcionar */
+    text-decoration: none;
     color: #555;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
-    padding: 12px 0; /* Espaçamento */
+    padding: 8px 15px; /* Padding ajustado */
     border-radius: 8px;
-    transition: all 0.3s ease; /* Efeito suave de cor e fundo */
+    transition: all 0.3s ease;
 }
 
 /* Efeito ao passar o mouse */
 .sidebar-nav a:hover {
-    color: #ffffff; /* Texto fica branco */
-    background-color: #008080; /* Fundo fica verde-água */
+    color: #ffffff;
+    background-color: #008080;
 }
 
-
 /* --- Estilos Antigos (Seções) --- */
-
 section {
-    background-color: #ffffff; 
+    background-color: #ffffff;
     margin-bottom: 20px;
-    padding: 30px; /* Aumentei o preenchimento */
+    padding: 20px; /* Padding ajustado */
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra mais suave */
-
-    /* Centraliza os blocos de seção na área de conteúdo */
-    max-width: 960px; 
-    margin-left: auto;   
-    margin-right: auto;
-    margin-bottom: 25px; /* Espaço entre seções */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 section h2 {
-    color: #008080; /* Título da seção em verde-água */
+    color: #008080;
     margin-top: 0;
-    border-bottom: 2px solid #f0f0f0; /* Linha sutil abaixo do título */
+    border-bottom: 2px solid #f0f0f0;
     padding-bottom: 10px;
 }
 
 /* Estilo dos Locais de Atendimento */
 article {
-    border-bottom: 1px dotted #ccc; 
+    border-bottom: 1px dotted #ccc;
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
 
 article:last-child {
-    border-bottom: none; 
+    border-bottom: none;
 }
 
 article h3 {
@@ -182,28 +141,84 @@ article h3 {
 footer {
     text-align: center;
     padding: 20px;
-    color: #aaa; /* Cor mais suave */
+    color: #aaa;
     font-size: 0.9em;
-    max-width: 960px;
-    margin: 0 auto;
 }
 
 /* --- ESTILO DO BOTÃO WHATSAPP --- */
-/* (Vamos tentar consertar isso depois) */
 #whatsapp-button {
-    position: fixed; 
+    position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 1000; 
+    z-index: 1000;
 }
 
 #whatsapp-button img {
     width: 60px;
-    border-radius: 50%; 
+    border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: transform 0.2s; 
+    transition: transform 0.2s;
 }
 
 #whatsapp-button img:hover {
-    transform: scale(1.1); 
+    transform: scale(1.1);
+}
+
+/* --- MEDIA QUERY PARA DESKTOP --- */
+/* As regras aqui dentro só serão aplicadas em telas com 1000px ou mais de largura */
+@media (min-width: 1000px) {
+
+    /* 1. Ativamos o Flexbox no 'Pai' */
+    .site-wrapper {
+        display: flex;
+    }
+
+    /* 2. A 'Filha' Sidebar se torna uma barra lateral fixa */
+    .sidebar {
+        flex-basis: 300px; /* Largura fixa */
+        flex-shrink: 0; /* Impede que a barra encolha */
+        height: 100vh; /* 100% da altura da tela */
+        position: fixed; /* Fica presa na tela */
+        top: 0;
+        left: 0;
+        padding: 30px; /* Restaura padding original */
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1); /* Sombra na direita */
+    }
+
+    /* 3. O 'Filho' Conteúdo Principal é empurrado para o lado */
+    .main-content {
+        flex-grow: 1; /* Ocupa o resto do espaço */
+        margin-left: 300px; /* Compensa a largura da sidebar */
+        padding: 40px; /* Mais espaço para respirar */
+    }
+
+    /* Ajustes finos de estilo para a sidebar no desktop */
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 20px;
+    }
+
+    .sidebar-title {
+        font-size: 1.8em;
+    }
+
+    /* A navegação volta a ser uma lista vertical */
+    .sidebar-nav ul {
+        display: block; /* Remove o flexbox do mobile */
+        margin-top: 40px;
+    }
+
+    .sidebar-nav a {
+        display: block; /* Faz o link ocupar a linha toda */
+        padding: 12px 0; /* Restaura padding vertical */
+    }
+
+    /* Centraliza os blocos de conteúdo */
+    section, footer {
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 25px; /* Espaço entre seções */
+    }
 }
